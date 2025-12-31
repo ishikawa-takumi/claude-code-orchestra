@@ -10,8 +10,15 @@ LLM/エージェント開発プロジェクト
 
 ## 技術スタック
 
-- 言語: Python
-- 主要ライブラリ: <!-- 使用ライブラリを記入 -->
+- **言語**: Python
+- **パッケージ管理**: uv（必須）
+- **開発ツール**:
+  - ruff（リント・フォーマット）
+  - mypy（型チェック）
+  - poe / poethepoet（タスクランナー）
+  - pytest（テスト）
+- **環境管理**: venv（uv経由で管理）
+- **主要ライブラリ**: <!-- 使用ライブラリを記入 -->
 
 ---
 
@@ -85,8 +92,9 @@ LLM/エージェント開発プロジェクト
 - **英語でコーディング** - 変数名，関数名，コメント，docstringはすべて英語
 
 ### ライブラリ管理
+- **uvを使用**（pip直接使用は禁止）
+- 依存関係は `pyproject.toml` で管理
 - 各ライブラリの機能・制約を `.claude/docs/libraries/` に文書化
-- バージョン固定は `requirements.txt` または `pyproject.toml` で管理
 - ライブラリ間の依存関係・競合に注意
 
 ### 情報収集
@@ -121,25 +129,27 @@ tests/                     # テスト
 ## よく使うコマンド
 
 ```bash
-# 仮想環境
-python -m venv .venv
+# プロジェクト初期化（uv必須）
+uv init
+uv venv
 source .venv/bin/activate  # Linux/Mac
-.venv\Scripts\activate     # Windows
 
 # 依存関係
-pip install -r requirements.txt
-pip install -e .
+uv add <package>           # パッケージ追加
+uv add --dev <package>     # 開発依存追加
+uv sync                    # 依存関係同期
 
-# テスト
-pytest
-pytest -v --tb=short
+# タスク実行（poethepoet）
+poe lint                   # ruff check + format
+poe test                   # pytest実行
+poe typecheck              # mypy実行
+poe all                    # 全チェック実行
 
-# リント・フォーマット
-ruff check .
-ruff format .
-
-# 型チェック
-mypy src/
+# 個別実行
+uv run ruff check .
+uv run ruff format .
+uv run mypy src/
+uv run pytest -v --tb=short
 ```
 
 ## 注意事項
