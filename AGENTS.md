@@ -37,7 +37,6 @@ Claude Code と Codex CLI の両方で利用可能です。
 | **lib-researcher** | ライブラリ調査・文書化 | 「このライブラリについて調べて」 |
 | **debugger** | エラー調査・修正 | 「エラーが出た」「動かない」 |
 | **refactorer** | リファクタリング | 「シンプルにして」「整理して」 |
-| **codex-delegate** | [任意] 大規模タスクをCodexに自律委譲 | 10+ファイル影響、明示リクエスト |
 
 ### Skills（自動発動）
 
@@ -48,6 +47,7 @@ Claude Code と Codex CLI の両方で利用可能です。
 | **design-tracker** | 設計決定の記録 | 「記録して」「アーキテクチャ」 |
 | **mcp-builder** | MCPサーバー開発ガイド | 「MCPサーバーを作りたい」 |
 | **skill-creator** | 新規スキル作成 | 「スキルを作りたい」 |
+| **codex-auto** | [任意] 大規模タスクをCodexに自律委譲 | 10+ファイル、「Codexに任せて」 |
 
 ### Commands（明示的呼び出し）
 
