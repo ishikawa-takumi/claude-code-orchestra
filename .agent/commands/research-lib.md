@@ -1,4 +1,4 @@
-$ARGUMENTS について調査し，`docs/libraries/` にドキュメントを作成してください．
+$ARGUMENTS について調査し，`.claude/docs/libraries/` にドキュメントを作成してください．
 
 ## 調査項目
 
