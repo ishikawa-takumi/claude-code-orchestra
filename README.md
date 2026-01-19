@@ -59,6 +59,7 @@ echo -e "\n# Claude Code / Codex CLI\n.agent/\n.claude/\n.codex/\nAGENTS.md\nCLA
 .claude/                   # Claude Code（System 1）の設定・知識ベース
 ├── settings.json          # 権限設定
 ├── agents/                # サブエージェント
+├── rules/                 # 常時適用ルール
 ├── docs/                  # 知識ベース（実体）
 │   ├── DESIGN.md          # 設計ドキュメント
 │   └── libraries/         # ライブラリ文書
@@ -96,6 +97,16 @@ CLAUDE.md -> AGENTS.md     # シンボリックリンク
 | **skill-creator** | 新規スキル作成をガイド |
 | **codex-system** | 複雑なタスクを Codex CLI (System 2) に委譲 |
 
+### ルール（常時適用）
+
+`.claude/rules/` に配置されたルールは常に適用されます:
+
+| ルール | 内容 |
+|--------|------|
+| **coding-principles** | シンプルさ，単一責任，早期リターン，型ヒント |
+| **security** | 機密情報管理，入力検証，SQLi/XSS 防止 |
+| **testing** | TDD，AAA パターン，カバレッジ 80% |
+
 ## 権限設定
 
 デフォルトで最大権限を付与し、機密ファイルのみ保護:
@@ -120,6 +131,8 @@ CLAUDE.md -> AGENTS.md     # シンボリックリンク
 | コマンド | 説明 |
 |----------|------|
 | `/init` | プロジェクトを分析して AGENTS.md を生成 |
+| `/plan <feature>` | 実装計画を立案 |
+| `/tdd <feature>` | テスト駆動開発ワークフロー |
 | `/research-lib <lib>` | ライブラリを調査して文書化 |
 | `/simplify <path>` | コードをシンプルにリファクタリング |
 | `/update-design` | 設計ドキュメントを更新 |
@@ -152,6 +165,10 @@ CLAUDE.md -> AGENTS.md     # シンボリックリンク
 ### .claude/docs/libraries/
 
 `/research-lib` コマンドでライブラリの制約・使用パターンが文書化されます。
+
+### .claude/rules/
+
+コーディングルールを追加・編集できます。不要なルールは削除可能。
 
 ## ライセンス
 

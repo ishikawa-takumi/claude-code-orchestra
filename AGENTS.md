@@ -55,10 +55,23 @@ Claude Code と Codex CLI の両方で利用可能です。
 
 | コマンド | 用途 |
 |---------|------|
+| `/init` | プロジェクト分析・AGENTS.md 生成 |
+| `/plan` | 実装計画の立案 |
+| `/tdd` | テスト駆動開発ワークフロー |
 | `/research-lib` | ライブラリを調査してドキュメント化 |
 | `/simplify` | 指定コードをシンプルにリファクタリング |
 | `/update-design` | 会話から設計ドキュメントを更新 |
 | `/update-lib-docs` | ライブラリドキュメントを最新化 |
+
+### Rules（常時適用）
+
+常に従うべきルール（`.claude/rules/`）：
+
+| ルール | 内容 |
+|--------|------|
+| **coding-principles** | シンプルさ，単一責任，早期リターン，型ヒント |
+| **security** | 機密情報管理，入力検証，SQLi/XSS防止 |
+| **testing** | TDD，AAA パターン，カバレッジ 80% |
 
 ---
 
@@ -69,6 +82,9 @@ Claude Code と Codex CLI の両方で利用可能です。
 
 各ライブラリの機能・制約・使用パターン:
 - `.claude/docs/libraries/`
+
+コーディングルール（常時適用）:
+- `.claude/rules/`
 
 ## 記憶の整理（自動）
 
@@ -114,6 +130,10 @@ Claude Code と Codex CLI の両方で利用可能です。
 .claude/                   # Claude Code（System 1）の設定・知識ベース
 ├── settings.json          # 権限設定
 ├── agents/                # サブエージェント
+├── rules/                 # 常時適用ルール
+│   ├── coding-principles.md
+│   ├── security.md
+│   └── testing.md
 ├── docs/                  # 知識ベース（実体）
 │   ├── DESIGN.md          # 設計ドキュメント
 │   └── libraries/         # ライブラリドキュメント
