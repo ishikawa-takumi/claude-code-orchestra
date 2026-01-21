@@ -193,16 +193,15 @@ After recording, report briefly like "Recorded in DESIGN.md".
 ├── docs/                  # Knowledge base (actual)
 │   ├── DESIGN.md          # Design document
 │   └── libraries/         # Library documentation
-├── skills -> ../.agent/skills
-└── commands -> ../.agent/commands
-
-.agent/                    # Shared tools
-├── commands/              # Claude Code commands
 ├── skills/                # Auto-trigger skills
-└── docs -> ../.claude/docs   # Link to knowledge base
+│   ├── codex-system/      # Codex CLI collaboration
+│   └── design-tracker/    # Design decision tracking
+└── commands/              # Explicit invocation commands
 
 .codex/                    # Codex CLI settings
-└── skills -> ../.agent/skills  # Shared skills
+├── config.toml            # Skills enabled, features
+└── skills/
+    └── context-loader/    # Load .claude/ context at task start
 
 src/                       # Source code
 tests/                     # Tests
