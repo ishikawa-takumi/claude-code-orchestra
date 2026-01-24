@@ -142,15 +142,17 @@ gemini -p "List: {what}" --output-format json 2>/dev/null
 This project includes the following extensions.
 Available for both Claude Code and Codex CLI.
 
-### Agents (Auto-Delegation)
+### Agents (Subagents)
 
-Agents that execute specialized tasks in independent context:
+Subagents for parallel task execution:
 
-| Agent | Purpose | Trigger Examples |
-|-------|---------|------------------|
-| **code-reviewer** | Review after code changes | "review this", "check this" |
-| **lib-researcher** | Library research & docs | "research this library" |
-| **refactorer** | Refactoring | "simplify this", "clean up" |
+| Agent | Purpose | When to Use |
+|-------|---------|-------------|
+| **general-purpose** | Independent tasks, exploration, simple implementations | Parallel work that doesn't need Codex/Gemini expertise |
+
+> **Note:** Specialized tasks are delegated to external CLIs:
+> - **Code review, Refactoring** → Codex CLI (see `codex-system` skill)
+> - **Library research** → Gemini CLI (see `gemini-system` skill)
 
 ### Skills
 
