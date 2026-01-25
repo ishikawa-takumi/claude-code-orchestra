@@ -10,8 +10,10 @@ Claude Code (Orchestrator) ─┬─ Codex CLI (Deep Reasoning)
 
 ## Quick Start
 
+既存プロジェクトのルートで実行:
+
 ```bash
-git clone https://github.com/DeL-TaiseiOzaki/claude-code-orchestra.git && cd claude-code-orchestra && claude
+git clone --depth 1 https://github.com/DeL-TaiseiOzaki/claude-code-orchestra.git .starter && cp -r .starter/.claude .starter/.codex .starter/.gemini .starter/CLAUDE.md . && rm -rf .starter && claude
 ```
 
 ## Prerequisites
