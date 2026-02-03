@@ -12,7 +12,7 @@ Claude Code (Orchestrator) ─┬─ Codex CLI (Deep Reasoning)
 
 ## Quick Start
 
-既存プロジェクトのルートで実行:
+Run at the root of an existing project:
 
 ```bash
 git clone --depth 1 https://github.com/DeL-TaiseiOzaki/claude-code-orchestra.git .starter && cp -r .starter/.claude .starter/.codex .starter/.gemini .starter/CLAUDE.md . && rm -rf .starter && claude
@@ -46,208 +46,208 @@ gemini login
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │           Claude Code (Orchestrator)                        │
-│           → コンテキスト節約が最優先                         │
-│           → ユーザー対話・調整・実行を担当                   │
+│           → Context conservation is the top priority        │
+│           → Handles user interaction, coordination, execution│
 │                      ↓                                      │
 │  ┌───────────────────────────────────────────────────────┐  │
 │  │              Subagent (general-purpose)               │  │
-│  │              → 独立したコンテキストを持つ               │  │
-│  │              → Codex/Gemini を呼び出し可能             │  │
-│  │              → 結果を要約してメインに返す              │  │
+│  │              → Has its own isolated context           │  │
+│  │              → Can call Codex/Gemini                  │  │
+│  │              → Summarizes results back to main        │  │
 │  │                                                       │  │
 │  │   ┌──────────────┐        ┌──────────────┐           │  │
 │  │   │  Codex CLI   │        │  Gemini CLI  │           │  │
-│  │   │  設計・推論  │        │  リサーチ    │           │  │
-│  │   │  デバッグ    │        │  マルチモーダル│          │  │
+│  │   │  design/reasoning │   │  research    │           │  │
+│  │   │  debugging   │        │  multimodal  │           │  │
 │  │   └──────────────┘        └──────────────┘           │  │
 │  └───────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### コンテキスト管理（重要）
+### Context Management (Important)
 
-メインオーケストレーターのコンテキストを節約するため、大きな出力が予想されるタスクはサブエージェント経由で実行します。
+To conserve the main orchestrator's context, tasks expected to produce large output should run via subagents.
 
-| 状況 | 推奨方法 |
+| Situation | Recommended Approach |
 |------|----------|
-| 大きな出力が予想される | サブエージェント経由 |
-| 短い質問・短い回答 | 直接呼び出しOK |
-| Codex/Gemini相談 | サブエージェント経由 |
-| 詳細な分析が必要 | サブエージェント経由 → ファイル保存 |
+| Large output expected | via subagent |
+| Short questions/short answers | direct call OK |
+| Codex/Gemini consultation | via subagent |
+| Detailed analysis needed | via subagent → save to file |
 
 ## Directory Structure
 
 ```
 .
-├── CLAUDE.md                    # メインシステムドキュメント
+├── CLAUDE.md                    # main system documentation
 ├── README.md
-├── pyproject.toml               # Python プロジェクト設定
-├── uv.lock                      # 依存関係ロックファイル
+├── pyproject.toml               # Python project settings
+├── uv.lock                      # dependency lockfile
 │
 ├── .claude/
 │   ├── agents/
-│   │   └── general-purpose.md   # サブエージェント設定
+│   │   └── general-purpose.md   # subagent configuration
 │   │
-│   ├── skills/                  # 再利用可能なワークフロー
-│   │   ├── startproject/        # プロジェクト開始
-│   │   ├── plan/                # 実装計画作成
-│   │   ├── tdd/                 # テスト駆動開発
-│   │   ├── checkpointing/       # セッション永続化
-│   │   ├── codex-system/        # Codex CLI連携
-│   │   ├── gemini-system/       # Gemini CLI連携
+│   ├── skills/                  # reusable workflows
+│   │   ├── startproject/        # project kickoff
+│   │   ├── plan/                # implementation planning
+│   │   ├── tdd/                 # test-driven development
+│   │   ├── checkpointing/       # session persistence
+│   │   ├── codex-system/        # Codex CLI integration
+│   │   ├── gemini-system/       # Gemini CLI integration
 │   │   └── ...
 │   │
-│   ├── hooks/                   # 自動化フック
-│   │   ├── agent-router.py      # エージェントルーティング
-│   │   ├── lint-on-save.py      # 保存時自動lint
+│   ├── hooks/                   # automation hooks
+│   │   ├── agent-router.py      # agent routing
+│   │   ├── lint-on-save.py      # auto-lint on save
 │   │   └── ...
 │   │
-│   ├── rules/                   # 開発ガイドライン
+│   ├── rules/                   # development guidelines
 │   │   ├── coding-principles.md
 │   │   ├── testing.md
 │   │   └── ...
 │   │
 │   ├── docs/
-│   │   ├── DESIGN.md            # 設計決定記録
-│   │   ├── research/            # Gemini調査結果
-│   │   └── libraries/           # ライブラリ制約
+│   │   ├── DESIGN.md            # design decision log
+│   │   ├── research/            # Gemini research results
+│   │   └── libraries/           # library constraints
 │   │
 │   └── logs/
-│       └── cli-tools.jsonl      # Codex/Gemini入出力ログ
+│       └── cli-tools.jsonl      # Codex/Gemini I/O logs
 │
-├── .codex/                      # Codex CLI設定
+├── .codex/                      # Codex CLI settings
 │   ├── AGENTS.md
 │   └── config.toml
 │
-└── .gemini/                     # Gemini CLI設定
+└── .gemini/                     # Gemini CLI settings
     ├── GEMINI.md
     └── settings.json
 ```
 
 ## Skills
 
-### `/startproject` — プロジェクト開始
+### `/startproject` — Project Kickoff
 
-マルチエージェント協調でプロジェクトを開始します。
-
-```
-/startproject ユーザー認証機能
-```
-
-**ワークフロー:**
-1. **Gemini** → リポジトリ分析・事前調査
-2. **Claude** → 要件ヒアリング・計画作成
-3. **Codex** → 計画レビュー・リスク分析
-4. **Claude** → タスクリスト作成
-
-### `/plan` — 実装計画
-
-要件を具体的なステップに分解します。
+Start a project with multi-agent collaboration.
 
 ```
-/plan APIエンドポイントの追加
+/startproject user-authentication
 ```
 
-**出力:**
-- 実装ステップ（ファイル・変更内容・検証方法）
-- 依存関係・リスク
-- 検証基準
+**Workflow:**
+1. **Gemini** → repository analysis and pre-research
+2. **Claude** → requirements discovery and plan creation
+3. **Codex** → plan review and risk analysis
+4. **Claude** → task list creation
 
-### `/tdd` — テスト駆動開発
+### `/plan` — Implementation Plan
 
-Red-Green-Refactorサイクルで実装します。
+Break requirements into concrete steps.
 
 ```
-/tdd ユーザー登録機能
+/plan add-api-endpoint
 ```
 
-**ワークフロー:**
-1. テストケース設計
-2. 失敗するテスト作成（Red）
-3. 最小限の実装（Green）
-4. リファクタリング（Refactor）
+**Output:**
+- implementation steps (files, changes, verification)
+- dependencies and risks
+- acceptance criteria
 
-### `/checkpointing` — セッション永続化
+### `/tdd` — Test-Driven Development
 
-セッションの状態を保存します。
+Implement using the Red-Green-Refactor cycle.
+
+```
+/tdd user-registration
+```
+
+**Workflow:**
+1. test case design
+2. write failing tests (Red)
+3. minimal implementation (Green)
+4. refactor (Refactor)
+
+### `/checkpointing` — Session Persistence
+
+Save the session state.
 
 ```bash
-/checkpointing              # 基本: 履歴ログ
-/checkpointing --full       # 完全: git履歴・ファイル変更含む
-/checkpointing --analyze    # 分析: 再利用可能なスキルパターン発見
+/checkpointing              # basic: history log
+/checkpointing --full       # full: includes git history and file changes
+/checkpointing --analyze    # analysis: discover reusable skill patterns
 ```
 
-### `/codex-system` — Codex CLI連携
+### `/codex-system` — Codex CLI Integration
 
-設計判断・デバッグ・トレードオフ分析に使用します。
+Use for design decisions, debugging, and trade-off analysis.
 
-**トリガー例:**
-- 「どう設計すべき？」「どう実装する？」
-- 「なぜ動かない？」「エラーが出る」
-- 「どちらがいい？」「比較して」
+**Trigger examples:**
+- "How should I design this?" "How should I implement this?"
+- "Why isn't it working?" "I'm getting an error"
+- "Which is better?" "Compare these"
 
-### `/gemini-system` — Gemini CLI連携
+### `/gemini-system` — Gemini CLI Integration
 
-リサーチ・大規模分析・マルチモーダル処理に使用します。
+Use for research, large-scale analysis, and multimodal processing.
 
-**トリガー例:**
-- 「調べて」「リサーチして」
-- 「このPDF/動画を見て」
-- 「コードベース全体を理解して」
+**Trigger examples:**
+- "Look this up" "Do research"
+- "Review this PDF/video"
+- "Understand the entire codebase"
 
-### `/simplify` — コードリファクタリング
+### `/simplify` — Code Refactoring
 
-コードを簡潔化・可読性向上させます。
+Simplify code and improve readability.
 
-### `/design-tracker` — 設計決定追跡
+### `/design-tracker` — Design Decision Tracking
 
-アーキテクチャ・実装決定を自動記録します。
+Automatically record architecture and implementation decisions.
 
 ## Development
 
 ### Tech Stack
 
-| ツール | 用途 |
+| Tool | Purpose |
 |--------|------|
-| **uv** | パッケージ管理（pip禁止） |
-| **ruff** | リント・フォーマット |
-| **mypy** | 型チェック |
-| **pytest** | テスト |
-| **poethepoet** | タスクランナー |
+| **uv** | package management (pip not allowed) |
+| **ruff** | linting/formatting |
+| **mypy** | type checking |
+| **pytest** | testing |
+| **poethepoet** | task runner |
 
 ### Commands
 
 ```bash
-# 依存関係
-uv add <package>           # パッケージ追加
-uv add --dev <package>     # 開発依存追加
-uv sync                    # 依存関係同期
+# dependencies
+uv add <package>           # add package
+uv add --dev <package>     # add dev dependency
+uv sync                    # sync dependencies
 
-# 品質チェック
+# quality checks
 poe lint                   # ruff check + format
 poe typecheck              # mypy
 poe test                   # pytest
-poe all                    # 全チェック実行
+poe all                    # run all checks
 
-# 直接実行
+# direct runs
 uv run pytest -v
 uv run ruff check .
 ```
 
 ## Hooks
 
-自動化フックにより、適切なタイミングでエージェント連携を提案します。
+Automation hooks suggest agent collaboration at the right time.
 
-| フック | トリガー | 動作 |
+| Hook | Trigger | Action |
 |--------|----------|------|
-| `agent-router.py` | ユーザー入力 | Codex/Geminiへのルーティング提案 |
-| `lint-on-save.py` | ファイル保存 | 自動lint実行 |
-| `check-codex-before-write.py` | ファイル書き込み前 | Codex相談提案 |
-| `log-cli-tools.py` | Codex/Gemini実行 | 入出力ログ記録 |
+| `agent-router.py` | user input | suggest routing to Codex/Gemini |
+| `lint-on-save.py` | file save | run auto-lint |
+| `check-codex-before-write.py` | before file write | suggest Codex consultation |
+| `log-cli-tools.py` | Codex/Gemini run | record I/O logs |
 
 ## Language Rules
 
-- **コード・思考・推論**: 英語
-- **ユーザーへの応答**: 日本語
-- **技術ドキュメント**: 英語
-- **README等**: 日本語可
+- **Code/Thinking/Reasoning**: English
+- **User responses**: English
+- **Technical documentation**: English
+- **User-facing documentation (README, etc.)**: English

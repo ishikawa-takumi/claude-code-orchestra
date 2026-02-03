@@ -1,98 +1,98 @@
 # {Library Name}
 
-> 最終更新: YYYY-MM-DD
+> Last updated: YYYY-MM-DD
 
-## 基本情報
+## Basic Info
 
-| 項目 | 内容 |
+| Item | Details |
 |------|------|
-| バージョン | x.x.x |
-| ライセンス | MIT / Apache 2.0 / etc. |
-| 公式ドキュメント | https://... |
+| Version | x.x.x |
+| License | MIT / Apache 2.0 / etc. |
+| Official docs | https://... |
 | GitHub | https://github.com/... |
 | PyPI | https://pypi.org/project/... |
 
-## インストール
+## Installation
 
 ```bash
 pip install library-name
 ```
 
-## コア機能
+## Core Features
 
-### 機能1: XXX
+### Feature 1: XXX
 
-説明...
+Description...
 
 ```python
-# 基本的な使い方
+# Basic usage
 from library import Something
 
 result = Something.do_thing()
 ```
 
-### 機能2: YYY
+### Feature 2: YYY
 
-説明...
-
-```python
-# 使用例
-```
-
-## 制約・注意点
-
-### ⚠️ 重要な制約
-
-- 制約1の説明
-- 制約2の説明
-
-### 他ライブラリとの競合
-
-- `library-x` と同時に使う場合: ...
-- `library-y` との非互換: ...
-
-### パフォーマンス特性
-
-- メモリ使用量: ...
-- 処理速度: ...
-
-## 本プロジェクトでの使用パターン
-
-### 推奨パターン
+Description...
 
 ```python
-# 推奨する使い方
+# Example usage
 ```
 
-### 避けるべきパターン
+## Constraints and Notes
+
+### ⚠️ Critical Constraints
+
+- Constraint 1 description
+- Constraint 2 description
+
+### Conflicts with Other Libraries
+
+- When used with `library-x`: ...
+- Incompatible with `library-y`: ...
+
+### Performance Characteristics
+
+- Memory usage: ...
+- Processing speed: ...
+
+## Usage Patterns in This Project
+
+### Recommended Patterns
 
 ```python
-# ❌ やってはいけない例
+# Recommended usage
 ```
 
-## トラブルシューティング
+### Patterns to Avoid
 
-### エラー: "XXX"
-
-**原因**: ...
-
-**解決策**:
 ```python
-# 修正例
+# ❌ Example of what not to do
 ```
 
-### エラー: "YYY"
+## Troubleshooting
 
-**原因**: ...
+### Error: "XXX"
 
-**解決策**: ...
+**Cause**: ...
 
-## 関連ファイル
+**Solution**:
+```python
+# Fix example
+```
 
-- `src/xxx/yyy.py` - このライブラリのラッパー
-- `tests/test_xxx.py` - テスト
+### Error: "YYY"
 
-## 参考リンク
+**Cause**: ...
 
-- [公式チュートリアル](https://...)
+**Solution**: ...
+
+## Related Files
+
+- `src/xxx/yyy.py` - wrapper for this library
+- `tests/test_xxx.py` - tests
+
+## References
+
+- [Official tutorial](https://...)
 - [GitHub Issues](https://...)

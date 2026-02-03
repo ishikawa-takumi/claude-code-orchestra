@@ -8,15 +8,15 @@ metadata:
   short-description: Checkpoint session context with skill extraction support
 ---
 
-# Checkpointing — セッションコンテキストの永続化
+# Checkpointing — Session Context Persistence
 
-**セッション中の作業履歴を保存し、再利用可能なスキルパターンを発見します。**
+**Save work history during a session and discover reusable skill patterns.**
 
-## モード
+## Modes
 
-### Mode 1: Session History（デフォルト）
+### Mode 1: Session History (default)
 
-CLI相談履歴を各エージェントの設定ファイルに追記。
+Append CLI consultation history to each agent's configuration file.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -32,9 +32,9 @@ CLI相談履歴を各エージェントの設定ファイルに追記。
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Mode 2: Full Checkpoint（--full）
+### Mode 2: Full Checkpoint (--full)
 
-作業全体の包括的なスナップショットを作成。
+Create a comprehensive snapshot of the entire work session.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -53,84 +53,84 @@ CLI相談履歴を各エージェントの設定ファイルに追記。
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Mode 3: Skill Analysis（--full --analyze）
+### Mode 3: Skill Analysis (--full --analyze)
 
-チェックポイントからスキル化できるパターンを発見。
+Discover patterns that can be turned into skills from checkpoints.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  /checkpointing --full --analyze                            │
 │                      ↓                                      │
-│  1. Full Checkpoint を生成                                   │
-│  2. 分析用プロンプトを生成                                    │
+│  1. Generate Full Checkpoint                                │
+│  2. Generate analysis prompt                                │
 │     → .claude/checkpoints/YYYY-MM-DD-HHMMSS.analyze-prompt.md│
 │                      ↓                                      │
-│  3. サブエージェントでAI分析を実行                            │
-│     → 作業パターンを発見                                      │
-│     → スキル候補を提案                                        │
+│  3. Run AI analysis via subagent                            │
+│     → Discover work patterns                                │
+│     → Propose skill candidates                              │
 │                      ↓                                      │
-│  4. 新スキルを .claude/skills/ に追加                         │
+│  4. Add new skills to .claude/skills/                       │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-**発見するパターン例:**
-- テスト→実装の繰り返し（TDDワークフロー）
-- リサーチ→設計→実装の流れ
-- 特定ファイルセットの同時変更
-- CLI相談→コード変更のシーケンス
+**Example patterns to discover:**
+- test → implement loop (TDD workflow)
+- research → design → implementation flow
+- simultaneous changes to a specific file set
+- CLI consultation → code change sequence
 
-## 使い方
+## Usage
 
 ```bash
-# Session History モード（デフォルト）
+# Session History mode (default)
 /checkpointing
 
-# Full Checkpoint モード
+# Full Checkpoint mode
 /checkpointing --full
 
-# Skill Analysis モード（推奨）
+# Skill Analysis mode (recommended)
 /checkpointing --full --analyze
 
-# 期間指定
+# Time range
 /checkpointing --since "2026-01-26"
 /checkpointing --full --analyze --since "2026-01-26"
 ```
 
-### Skill Analysis の実行フロー
+### Skill Analysis Execution Flow
 
 ```bash
-# Step 1: チェックポイント + 分析プロンプト生成
+# Step 1: Generate checkpoint + analysis prompt
 python checkpoint.py --full --analyze
 
-# Step 2: サブエージェントで分析（Claudeが自動実行）
-# → 分析プロンプトを読み込み
-# → スキル候補を提案
-# → ユーザーが承認したらスキルを生成
+# Step 2: Analyze with subagent (Claude runs automatically)
+# → Read the analysis prompt
+# → Propose skill candidates
+# → Generate skills after user approval
 ```
 
-## 処理内容
+## Processing Details
 
-### Session History モード
+### Session History Mode
 
-1. `.claude/logs/cli-tools.jsonl` を解析
-2. Codex/Geminiへの相談内容を日付ごとに整理
-3. 各エージェント設定ファイルに `## Session History` を追記
+1. Parse `.claude/logs/cli-tools.jsonl`
+2. Organize Codex/Gemini consultations by date
+3. Append `## Session History` to each agent config file
 
-### Full Checkpoint モード
+### Full Checkpoint Mode
 
-1. **Git情報を収集**
-   - `git log` でコミット履歴
-   - `git diff --name-status` でファイル変更
-   - `git diff --numstat` で行数変更
+1. **Collect Git information**
+   - `git log` for commit history
+   - `git diff --name-status` for file changes
+   - `git diff --numstat` for line changes
 
-2. **CLI相談ログを解析**
-   - Codex相談内容とステータス
-   - Gemini調査内容とステータス
+2. **Parse CLI consultation logs**
+   - Codex consultation content and status
+   - Gemini research content and status
 
-3. **チェックポイントファイルを生成**
+3. **Generate checkpoint file**
    - `.claude/checkpoints/YYYY-MM-DD-HHMMSS.md`
 
-## Full Checkpoint フォーマット
+## Full Checkpoint Format
 
 ```markdown
 # Checkpoint: 2026-01-28 15:30:00 UTC
@@ -162,44 +162,44 @@ python checkpoint.py --full --analyze
 ## CLI Tool Consultations
 
 ### Codex (3 consultations)
-- ✓ 設計: チェックポイント拡張アーキテクチャ
-- ✓ デバッグ: Git log parsing issue
+- ✓ Design: checkpoint extension architecture
+- ✓ Debugging: Git log parsing issue
 
 ### Gemini (2 researches)
-- ✓ 調査: Git integration best practices
+- ✓ Research: Git integration best practices
 ```
 
-## Session History フォーマット
+## Session History Format
 
 ```markdown
 ## Session History
 
 ### 2026-01-26
 
-**Codex相談:**
-- ✓ サブエージェントパターンでCodex/Gemini呼び出しを推奨...
+**Codex consultations:**
+- ✓ Recommended the subagent pattern for Codex/Gemini calls...
 
-**Gemini調査:**
-- ✓ MCP vs CLI比較調査...
+**Gemini research:**
+- ✓ MCP vs CLI comparison research...
 ```
 
-## 実行タイミング
+## Recommended Timing
 
-| タイミング | 推奨モード |
+| Timing | Recommended Mode |
 |-----------|-----------|
-| セッション終了前 | `--full --analyze` |
-| 重要な設計決定後 | `--full` |
-| 大きな機能実装完了後 | `--full --analyze` |
-| 長時間作業の区切り | `--full` |
-| 繰り返しパターンを感じた時 | `--full --analyze` |
-| 日次の軽い記録 | デフォルト |
+| Before ending a session | `--full --analyze` |
+| After major design decisions | `--full` |
+| After completing large feature implementations | `--full --analyze` |
+| At natural breakpoints in long work | `--full` |
+| When you notice a recurring pattern | `--full --analyze` |
+| Daily light logging | default |
 
-## 注意事項
+## Notes
 
-- ログが空の場合は何も追記されません
-- 既存の `## Session History` セクションは上書きされます
-- ログファイル自体は変更されません（読み取りのみ）
-- Full Checkpoint は `.claude/checkpoints/` に蓄積されます
-- Git未初期化プロジェクトでもCLIログ部分は動作します
-- `--analyze` で生成されたスキル提案は人間がレビューしてから採用すること
-- スキル分析はパターンを固定せず、AIが自由に発見する設計
+- If logs are empty, nothing is appended
+- Existing `## Session History` sections are overwritten
+- The log file itself is not modified (read-only)
+- Full Checkpoints accumulate in `.claude/checkpoints/`
+- CLI log processing works even if Git is not initialized
+- Skill suggestions generated by `--analyze` must be reviewed by a human before adoption
+- Skill analysis is designed to let AI discover patterns freely, not to force pre-defined ones

@@ -36,7 +36,7 @@ Also detect:
 Use AskUserQuestion tool to ask:
 
 1. **Project overview**: What does this project do? (1-2 sentences)
-2. **Code language**: English or Japanese for comments/variable names?
+2. **Code language**: English for comments/variable names (confirm)?
 3. **Additional rules**: Any other coding conventions to follow?
 
 ### 3. Partial Update of AGENTS.md
@@ -51,8 +51,8 @@ Use Edit tool to update only the top section (up to first `---`) with this forma
 ## Language Settings
 
 - **Thinking/Reasoning**: English
-- **Code**: {Based on analysis - English or Japanese}
-- **User Communication**: Japanese
+- **Code**: English
+- **User Communication**: English
 
 ## Tech Stack
 
@@ -84,7 +84,7 @@ Check rules in `.claude/rules/` and suggest removing unnecessary ones:
 
 ### 6. Report Completion
 
-Report to user (in Japanese):
+Report to user (in English):
 
 - Detected tech stack
 - Updated sections

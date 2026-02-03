@@ -23,7 +23,7 @@ Read relevant files from `.claude/rules/`:
 .claude/rules/
 ├── coding-principles.md   # Simplicity, single responsibility, early return
 ├── dev-environment.md     # uv, ruff, ty, pytest requirements
-├── language.md            # Think in English, respond in Japanese
+├── language.md            # Think in English, respond in English
 ├── security.md            # Secrets, validation, SQLi/XSS prevention
 └── testing.md             # TDD, AAA pattern, 80% coverage
 ```
