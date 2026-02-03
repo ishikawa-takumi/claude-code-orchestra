@@ -97,6 +97,37 @@ Bash("codex exec ... 'Answer in one sentence'")
 
 ---
 
+## CLAUDE.md Updates
+
+If the same mistake, misunderstanding, or omission happens more than once, update this file with a clear, actionable rule to prevent repeat issues.
+
+- Keep rules short and specific.
+- Prefer concrete do/don't guidance over general advice.
+- Add examples only when they clarify ambiguity.
+- Remove or consolidate outdated rules to keep this file concise.
+
+---
+
+## Working Practices
+
+### Rich Context Usage
+
+- Use `@` file references to point Claude to specific files.
+- Paste images directly when visuals are relevant.
+- Pipe data into Claude (logs, outputs, specs) instead of summarizing manually.
+
+### Session Management
+
+- Use `/clear` to reset context when switching tasks.
+- Use `/compact` to reduce context size while preserving key information.
+
+### CLI Tools / MCP / Plugins
+
+- Prefer CLI tools for deterministic actions (lint, tests, format, build).
+- Connect MCP servers or plugins when they provide reliable external context or tools.
+
+---
+
 ## Language Protocol
 
 - **Thinking/Code**: English
