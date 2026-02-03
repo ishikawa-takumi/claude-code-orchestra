@@ -1,98 +1,98 @@
 # {Library Name}
 
-> Last updated: YYYY-MM-DD
+> 最終更新: YYYY-MM-DD
 
-## Basic Info
+## 基本情報
 
-| Item | Details |
+| 項目 | 内容 |
 |------|------|
-| Version | x.x.x |
-| License | MIT / Apache 2.0 / etc. |
-| Official docs | https://... |
+| バージョン | x.x.x |
+| ライセンス | MIT / Apache 2.0 / etc. |
+| 公式ドキュメント | https://... |
 | GitHub | https://github.com/... |
 | PyPI | https://pypi.org/project/... |
 
-## Installation
+## インストール
 
 ```bash
 pip install library-name
 ```
 
-## Core Features
+## コア機能
 
-### Feature 1: XXX
+### 機能1: XXX
 
-Description...
+説明...
 
 ```python
-# Basic usage
+# 基本的な使い方
 from library import Something
 
 result = Something.do_thing()
 ```
 
-### Feature 2: YYY
+### 機能2: YYY
 
-Description...
-
-```python
-# Example usage
-```
-
-## Constraints and Notes
-
-### ⚠️ Critical Constraints
-
-- Constraint 1 description
-- Constraint 2 description
-
-### Conflicts with Other Libraries
-
-- When used with `library-x`: ...
-- Incompatible with `library-y`: ...
-
-### Performance Characteristics
-
-- Memory usage: ...
-- Processing speed: ...
-
-## Usage Patterns in This Project
-
-### Recommended Patterns
+説明...
 
 ```python
-# Recommended usage
+# 使用例
 ```
 
-### Patterns to Avoid
+## 制約・注意点
+
+### ⚠️ 重要な制約
+
+- 制約1の説明
+- 制約2の説明
+
+### 他ライブラリとの競合
+
+- `library-x` と同時に使う場合: ...
+- `library-y` との非互換: ...
+
+### パフォーマンス特性
+
+- メモリ使用量: ...
+- 処理速度: ...
+
+## 本プロジェクトでの使用パターン
+
+### 推奨パターン
 
 ```python
-# ❌ Example of what not to do
+# 推奨する使い方
 ```
 
-## Troubleshooting
+### 避けるべきパターン
 
-### Error: "XXX"
-
-**Cause**: ...
-
-**Solution**:
 ```python
-# Fix example
+# ❌ やってはいけない例
 ```
 
-### Error: "YYY"
+## トラブルシューティング
 
-**Cause**: ...
+### エラー: "XXX"
 
-**Solution**: ...
+**原因**: ...
 
-## Related Files
+**解決策**:
+```python
+# 修正例
+```
 
-- `src/xxx/yyy.py` - wrapper for this library
-- `tests/test_xxx.py` - tests
+### エラー: "YYY"
 
-## References
+**原因**: ...
 
-- [Official tutorial](https://...)
+**解決策**: ...
+
+## 関連ファイル
+
+- `src/xxx/yyy.py` - このライブラリのラッパー
+- `tests/test_xxx.py` - テスト
+
+## 参考リンク
+
+- [公式チュートリアル](https://...)
 - [GitHub Issues](https://...)

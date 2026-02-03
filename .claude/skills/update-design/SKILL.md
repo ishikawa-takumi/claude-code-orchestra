@@ -57,7 +57,7 @@ Always add to Changelog:
 
 ## Language
 
-- Document content: English
-- User communication: English
+- Document content: English (technical), Japanese OK for descriptions
+- User communication: Japanese
 
 If $ARGUMENTS provided, focus on recording that content.

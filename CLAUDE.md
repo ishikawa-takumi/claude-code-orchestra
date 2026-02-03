@@ -1,8 +1,8 @@
 # Claude Code Orchestra
 
-**Multi-agent Collaboration Framework**
+**マルチエージェント協調フレームワーク**
 
-Claude Code integrates Codex CLI (deep reasoning) and Gemini CLI (large-scale research) to accelerate development by leveraging each agent's strengths.
+Claude Code が Codex CLI（深い推論）と Gemini CLI（大規模リサーチ）を統合し、各エージェントの強みを活かして開発を加速する。
 
 ---
 
@@ -10,79 +10,79 @@ Claude Code integrates Codex CLI (deep reasoning) and Gemini CLI (large-scale re
 
 | Agent | Strength | Use For |
 |-------|----------|---------|
-| **Claude Code** | orchestration, user interaction | overall coordination, task management |
-| **Codex CLI** | deep reasoning, design decisions, debugging | design consultation, error analysis, trade-off evaluation |
-| **Gemini CLI** | 1M tokens, multimodal, web search | full codebase analysis, library research, PDF/video processing |
+| **Claude Code** | オーケストレーション、ユーザー対話 | 全体統括、タスク管理 |
+| **Codex CLI** | 深い推論、設計判断、デバッグ | 設計相談、エラー分析、トレードオフ評価 |
+| **Gemini CLI** | 1Mトークン、マルチモーダル、Web検索 | コードベース全体分析、ライブラリ調査、PDF/動画処理 |
 
-**IMPORTANT**: Even tasks that are difficult for a single agent can be solved through collaboration among the three agents.
+**IMPORTANT**: 単体では難しいタスクも、3エージェントの協調で解決できる。
 
 ---
 
 ## Context Management (CRITICAL)
 
-Claude Code's context window is **200k tokens**, but tool definitions and other overhead reduce the effective usable context to **about 70-100k**.
+Claude Code のコンテキストは **200k トークン** だが、ツール定義等で **実質 70-100k** に縮小する。
 
-**YOU MUST** call Codex/Gemini via subagents (when output is 10 lines or more).
+**YOU MUST** サブエージェント経由で Codex/Gemini を呼び出す（出力が10行以上の場合）。
 
-| Output Size | Method | Reason |
+| 出力サイズ | 方法 | 理由 |
 |-----------|------|------|
-| 1-2 sentences | direct call OK | no overhead |
-| 10+ lines | **via subagent** | protect main context |
-| analysis report | subagent → save to file | details are persisted in `.claude/docs/` |
+| 1-2文 | 直接呼び出しOK | オーバーヘッド不要 |
+| 10行以上 | **サブエージェント経由** | メインコンテキスト保護 |
+| 分析レポート | サブエージェント → ファイル保存 | 詳細は `.claude/docs/` に永続化 |
 
 ```
-# MUST: via subagent (large output)
-Task(subagent_type="general-purpose", prompt="Consult Codex on the design and return a summary")
+# MUST: サブエージェント経由（大きな出力）
+Task(subagent_type="general-purpose", prompt="Codexに設計を相談し、要約を返して")
 
-# OK: direct call (small output only)
-Bash("codex exec ... 'Answer in one sentence'")
+# OK: 直接呼び出し（小さな出力のみ）
+Bash("codex exec ... '1文で答えて'")
 ```
 
 ---
 
 ## Quick Reference
 
-### When to Use Codex
+### Codex を使う時
 
-- design decisions ("How should I implement?" "Which pattern?")
-- debugging ("Why isn't it working?" "What's causing the error?")
-- comparisons ("Which is better, A or B?")
+- 設計判断（「どう実装？」「どのパターン？」）
+- デバッグ（「なぜ動かない？」「エラーの原因は？」）
+- 比較検討（「AとBどちらがいい？」）
 
-→ Details: `.claude/rules/codex-delegation.md`
+→ 詳細: `.claude/rules/codex-delegation.md`
 
-### When to Use Gemini
+### Gemini を使う時
 
-- research ("Look this up" "What's the latest info?")
-- large-scale analysis ("Understand the entire codebase")
-- multimodal ("Review this PDF/video")
+- リサーチ（「調べて」「最新の情報は？」）
+- 大規模分析（「コードベース全体を理解して」）
+- マルチモーダル（「このPDF/動画を見て」）
 
-→ Details: `.claude/rules/gemini-delegation.md`
+→ 詳細: `.claude/rules/gemini-delegation.md`
 
 ---
 
 ## Workflow
 
 ```
-/startproject <feature-name>
+/startproject <機能名>
 ```
 
-1. Gemini analyzes the repository (via subagent)
-2. Claude conducts requirements discovery and creates a plan
-3. Codex reviews the plan (via subagent)
-4. Claude creates the task list
-5. **Post-implementation review in a separate session** (recommended)
+1. Gemini がリポジトリ分析（サブエージェント経由）
+2. Claude が要件ヒアリング・計画作成
+3. Codex が計画レビュー（サブエージェント経由）
+4. Claude がタスクリスト作成
+5. **別セッションで実装後レビュー**（推奨）
 
-→ Details: `/startproject`, `/plan`, `/tdd` skills
+→ 詳細: `/startproject`, `/plan`, `/tdd` skills
 
 ---
 
 ## Tech Stack
 
-- **Python** / **uv** (pip not allowed)
+- **Python** / **uv** (pip禁止)
 - **ruff** (lint/format) / **ty** (type check) / **pytest**
 - `poe lint` / `poe test` / `poe all`
 
-→ Details: `.claude/rules/dev-environment.md`
+→ 詳細: `.claude/rules/dev-environment.md`
 
 ---
 
@@ -90,14 +90,14 @@ Bash("codex exec ... 'Answer in one sentence'")
 
 | Location | Content |
 |----------|---------|
-| `.claude/rules/` | coding, security, and language rules |
-| `.claude/docs/DESIGN.md` | record of design decisions |
-| `.claude/docs/research/` | Gemini research results |
-| `.claude/logs/cli-tools.jsonl` | Codex/Gemini I/O logs |
+| `.claude/rules/` | コーディング・セキュリティ・言語ルール |
+| `.claude/docs/DESIGN.md` | 設計決定の記録 |
+| `.claude/docs/research/` | Gemini調査結果 |
+| `.claude/logs/cli-tools.jsonl` | Codex/Gemini入出力ログ |
 
 ---
 
 ## Language Protocol
 
-- **Thinking/Code**: English
-- **User communication**: English
+- **思考・コード**: 英語
+- **ユーザー対話**: 日本語

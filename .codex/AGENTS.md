@@ -76,7 +76,7 @@ Structure your response for Claude Code to use:
 
 - **Thinking**: English
 - **Code**: English
-- **Output**: English
+- **Output**: English (Claude Code translates to Japanese for user)
 
 ## Key Principles
 
@@ -87,7 +87,7 @@ Structure your response for Claude Code to use:
 
 ## CLI Logs
 
-Codex/Gemini inputs and outputs are recorded in `.claude/logs/cli-tools.jsonl`.
-If you need to review past consultations, refer to this log.
+Codex/Gemini への入出力は `.claude/logs/cli-tools.jsonl` に記録されています。
+過去の相談内容を確認する場合は、このログを参照してください。
 
-After running `/checkpointing`, Session History is appended below.
+`/checkpointing` 実行後、下記に Session History が追記されます。

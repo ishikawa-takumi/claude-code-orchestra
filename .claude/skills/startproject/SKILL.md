@@ -9,11 +9,11 @@ metadata:
 
 # Start Project
 
-**Start a project with multi-agent collaboration.**
+**マルチエージェント協調でプロジェクトを開始する。**
 
 ## Overview
 
-This skill coordinates three agents (Claude, Codex, Gemini) and covers the flow from project kickoff through post-implementation review.
+このスキルは3つのエージェント（Claude, Codex, Gemini）を協調させ、プロジェクト開始から実装後レビューまでをカバーする。
 
 ## Workflow
 
@@ -37,7 +37,7 @@ Phase 6: Multi-Session Review (New Session + Codex)
 
 ## Phase 1: Gemini Research (Background)
 
-**Start a subagent with the Task tool and analyze the repository with Gemini.**
+**Task tool でサブエージェントを起動し、Gemini でリポジトリ分析。**
 
 ```
 Task tool parameters:
@@ -65,22 +65,22 @@ Task tool parameters:
 
 ## Phase 2: Requirements Gathering (Claude)
 
-**Clarify requirements by asking the user.**
+**ユーザーに質問して要件を明確化。**
 
-Ask in English:
+Ask in Japanese:
 
-1. **Goal**: What do you want to achieve?
-2. **Scope**: What should be included/excluded?
-3. **Technical requirements**: Any specific libraries or constraints?
-4. **Success criteria**: How will completion be judged?
+1. **目的**: 何を達成したいですか？
+2. **スコープ**: 含めるもの・除外するものは？
+3. **技術的要件**: 特定のライブラリ、制約は？
+4. **成功基準**: 完了の判断基準は？
 
-**Draft an implementation plan based on Gemini research + user answers.**
+**Draft implementation plan based on Gemini research + user answers.**
 
 ---
 
 ## Phase 3: Codex Design Review (Background)
 
-**Start a subagent with the Task tool and review the plan with Codex.**
+**Task tool でサブエージェントを起動し、Codex で計画レビュー。**
 
 ```
 Task tool parameters:
@@ -113,7 +113,7 @@ Task tool parameters:
 
 ## Phase 4: Task Creation (Claude)
 
-**Consolidate subagent summaries and create a task list.**
+**サブエージェントの要約を統合し、タスクリストを作成。**
 
 Use TodoWrite to create tasks:
 
@@ -129,7 +129,7 @@ Use TodoWrite to create tasks:
 
 ## Phase 5: CLAUDE.md Update (IMPORTANT)
 
-**Append project-specific information to CLAUDE.md.**
+**プロジェクト固有の情報を CLAUDE.md に追記する。**
 
 Add to CLAUDE.md:
 
@@ -157,11 +157,11 @@ Add to CLAUDE.md:
 
 ## Phase 6: Multi-Session Review (Post-Implementation)
 
-**After implementation, run a review in a separate session.**
+**実装完了後、別セッションでレビューを実施。**
 
 ### Option A: New Claude Session
 
-1. Start a new Claude Code session
+1. Start new Claude Code session
 2. Run: `git diff main...HEAD` to see all changes
 3. Ask Claude to review the implementation
 
@@ -192,36 +192,36 @@ Task tool parameters:
 ### Why Multi-Session Review?
 
 - **Fresh perspective**: New session has no bias from implementation
-- **Different context**: Focus purely on review, not implementation details
+- **Different context**: Can focus purely on review, not implementation details
 - **Codex strength**: Deep analysis without context pollution
 
 ---
 
 ## User Confirmation
 
-Present the final plan to the user (in English). Use this structure:
+Present final plan to user (in Japanese):
 
 ```markdown
-## Project Plan: {feature}
+## プロジェクト計画: {feature}
 
-### Research Results (Gemini)
+### 調査結果 (Gemini)
 {Key findings - 3-5 bullet points}
 
-### Design Approach (Codex reviewed)
+### 設計方針 (Codex レビュー済み)
 {Approach with refinements}
 
-### Task List ({N} items)
+### タスクリスト ({N}個)
 {Task list}
 
-### Risks and Notes
+### リスクと注意点
 {From Codex analysis}
 
-### Next Steps
-1. Is it okay to proceed with this plan?
-2. After implementation, we will review in a separate session
+### 次のステップ
+1. この計画で進めてよろしいですか？
+2. 実装完了後、別セッションでレビューを行います
 
 ---
-Is it okay to proceed with this plan?
+この計画で進めてよろしいですか？
 ```
 
 ---

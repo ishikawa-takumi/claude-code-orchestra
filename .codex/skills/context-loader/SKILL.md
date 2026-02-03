@@ -23,7 +23,7 @@ Read all files in `.claude/rules/`:
 .claude/rules/
 ├── coding-principles.md   # Simplicity, single responsibility, early return
 ├── dev-environment.md     # uv, ruff, ty, pytest requirements
-├── language.md            # Think in English, respond in English
+├── language.md            # Think in English, respond in Japanese
 ├── security.md            # Secrets, validation, SQLi/XSS prevention
 ├── testing.md             # TDD, AAA pattern, 80% coverage
 └── codex-delegation.md    # (skip - not relevant for Codex itself)
@@ -65,7 +65,7 @@ After loading, always follow these principles:
 
 - **Thinking/Reasoning**: English
 - **Code**: English (variables, functions, comments)
-- **User communication**: English (when reporting back through Claude Code)
+- **User communication**: Japanese (when reporting back through Claude Code)
 
 ## Output
 

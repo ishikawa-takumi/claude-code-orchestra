@@ -4,20 +4,20 @@
 
 ## Context Management (CRITICAL)
 
-**Be mindful of context consumption when using Codex.** If large output is expected, use a subagent.
+**コンテキスト消費を意識してCodexを使う。** 大きな出力が予想される場合はサブエージェント経由を推奨。
 
-| Situation | Recommended Approach |
+| 状況 | 推奨方法 |
 |------|----------|
-| Short questions/short answers | direct call OK |
-| Detailed design consultation | via subagent |
-| Debugging analysis | via subagent |
-| Multiple questions | via subagent |
+| 短い質問・短い回答 | 直接呼び出しOK |
+| 詳細な設計相談 | サブエージェント経由 |
+| デバッグ分析 | サブエージェント経由 |
+| 複数の質問がある | サブエージェント経由 |
 
 ```
 ┌──────────────────────────────────────────────────────────┐
 │  Main Claude Code                                        │
-│  → Direct call OK for short questions                    │
-│  → Use subagents for large output                        │
+│  → 短い質問なら直接呼び出しOK                             │
+│  → 大きな出力が予想されるならサブエージェント経由          │
 │                                                          │
 │  ┌────────────────────────────────────────────────────┐ │
 │  │  Subagent (general-purpose)                         │ │
@@ -48,13 +48,13 @@ ALWAYS consult Codex BEFORE:
 
 Consult Codex when user says:
 
-| Trigger examples |
-|---------|
-| "How should I design/implement?" |
-| "Why doesn't this work?" "Error" |
-| "Which is better?" "Compare" |
-| "Build X" "Implement X" |
-| "Think" "Analyze" "Think deeper" |
+| Japanese | English |
+|----------|---------|
+| 「どう設計すべき？」「どう実装する？」 | "How should I design/implement?" |
+| 「なぜ動かない？」「原因は？」「エラーが出る」 | "Why doesn't this work?" "Error" |
+| 「どちらがいい？」「比較して」「トレードオフは？」 | "Which is better?" "Compare" |
+| 「〜を作りたい」「〜を実装して」 | "Build X" "Implement X" |
+| 「考えて」「分析して」「深く考えて」 | "Think" "Analyze" "Think deeper" |
 
 ## When NOT to Consult
 
@@ -121,7 +121,7 @@ codex exec --model gpt-5.2-codex --sandbox read-only --full-auto "Brief question
 1. Ask Codex in **English**
 2. Subagent receives response in **English**
 3. Subagent summarizes and returns to main
-4. Main reports to user in **English**
+4. Main reports to user in **Japanese**
 
 ## Why Subagent Pattern?
 

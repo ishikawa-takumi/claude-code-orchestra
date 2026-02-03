@@ -15,28 +15,28 @@ metadata:
 
 **Codex CLI (gpt-5.2-codex) is your highly capable supporter for deep reasoning tasks.**
 
-> **Detailed rules**: `.claude/rules/codex-delegation.md`
+> **詳細ルール**: `.claude/rules/codex-delegation.md`
 
 ## Context Management (CRITICAL)
 
-**Use subagents whenever possible.** This preserves the main orchestrator's context.
+**サブエージェント経由を推奨。** メインオーケストレーターのコンテキストを節約するため。
 
-| Situation | Method |
+| 状況 | 方法 |
 |------|------|
-| Detailed design consultation | via subagent (recommended) |
-| Debugging analysis | via subagent (recommended) |
-| Short questions (1-2 sentence answers) | direct call OK |
+| 詳細な設計相談 | サブエージェント経由（推奨） |
+| デバッグ分析 | サブエージェント経由（推奨） |
+| 短い質問 (1-2文回答) | 直接呼び出しOK |
 
 ## When to Consult (MUST)
 
 | Situation | Trigger Examples |
 |-----------|------------------|
-| **Design decisions** | "How to design?" |
-| **Debugging** | "Debug" "Error" |
-| **Trade-off analysis** | "Compare" "Which?" |
-| **Complex implementation** | "How to implement?" |
-| **Refactoring** | "Refactor" "Simplify" |
-| **Code review** | "Review" "Check" |
+| **Design decisions** | 「どう設計？」「アーキテクチャ」 / "How to design?" |
+| **Debugging** | 「なぜ動かない？」「エラー」 / "Debug" "Error" |
+| **Trade-off analysis** | 「どちらがいい？」「比較して」 / "Compare" "Which?" |
+| **Complex implementation** | 「実装方法」「どう作る？」 / "How to implement?" |
+| **Refactoring** | 「リファクタ」「シンプルに」 / "Refactor" "Simplify" |
+| **Code review** | 「レビューして」「確認して」 / "Review" "Check" |
 
 ## When NOT to Consult
 
@@ -91,7 +91,7 @@ codex exec --model gpt-5.2-codex --sandbox read-only --full-auto "Brief question
 1. Ask Codex in **English**
 2. Receive response in **English**
 3. Execute based on advice (or let Codex execute)
-4. Report to user in **English**
+4. Report to user in **Japanese**
 
 ## Task Templates
 

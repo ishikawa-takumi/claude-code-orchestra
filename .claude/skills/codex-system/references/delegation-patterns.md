@@ -1,41 +1,41 @@
-# Delegation Patterns (Detailed)
+# 委譲パターン詳細
 
-## Delegation Decision Flowchart
+## 委譲判断フローチャート
 
 ```
-Task received
+タスク受信
     │
     ▼
 ┌─────────────────────────┐
-│ Explicit Codex request? │
+│ 明示的な Codex 指示？    │
 └───────────┬─────────────┘
     ┌───────┴───────┐
     │ Yes          │ No
     ▼              ▼
-  Delegate   ┌─────────────────────────┐
-             │ Complexity check        │
-             └───────────┬─────────────┘
-             ┌───────────┴───────────┐
-             │ Yes                   │ No
-             ▼                       ▼
-           Delegate          ┌─────────────────────────┐
-                             │ Failure check (2+ tries)│
-                             └───────────┬─────────────┘
-                             ┌───────────┴───────────┐
-                             │ Yes                   │ No
-                             ▼                       ▼
-                           Delegate          ┌─────────────────────────┐
-                                             │ Quality/Security needs  │
-                                             └───────────┬─────────────┘
-                                             ┌───────────┴───────────┐
-                                             │ Yes                   │ No
-                                             ▼                       ▼
-                                           Delegate         Execute in Claude Code
+  委譲        ┌─────────────────────────┐
+              │ 複雑度チェック           │
+              └───────────┬─────────────┘
+              ┌───────────┴───────────┐
+              │ Yes                   │ No
+              ▼                       ▼
+            委譲              ┌─────────────────────────┐
+                              │ 失敗チェック（2回以上）  │
+                              └───────────┬─────────────┘
+                              ┌───────────┴───────────┐
+                              │ Yes                   │ No
+                              ▼                       ▼
+                            委譲              ┌─────────────────────────┐
+                                              │ 品質・セキュリティ要件  │
+                                              └───────────┬─────────────┘
+                                              ┌───────────┴───────────┐
+                                              │ Yes                   │ No
+                                              ▼                       ▼
+                                            委譲              Claude Code で実行
 ```
 
-## Examples by Pattern
+## パターン別実行例
 
-### Pattern 1: Architecture Review
+### Pattern 1: アーキテクチャレビュー
 
 ```bash
 codex exec \
@@ -53,7 +53,7 @@ codex exec \
    Constraints: Must maintain backward compatibility" 2>/dev/null
 ```
 
-### Pattern 2: Failure-Based Delegation
+### Pattern 2: 失敗ベース委譲
 
 ```bash
 codex exec \
@@ -75,7 +75,7 @@ codex exec \
    - What alternative approaches should we consider?" 2>/dev/null
 ```
 
-### Pattern 3: Performance Optimization
+### Pattern 3: パフォーマンス最適化
 
 ```bash
 codex exec \
@@ -99,7 +99,7 @@ codex exec \
    3. Benchmark comparison approach" 2>/dev/null
 ```
 
-### Pattern 4: Security Audit
+### Pattern 4: セキュリティ監査
 
 ```bash
 codex exec \
@@ -124,11 +124,11 @@ codex exec \
    - LOW: Tech debt" 2>/dev/null
 ```
 
-## Cases Not to Delegate
+## 委譲しないケース
 
-| Case | Reason |
+| ケース | 理由 |
 |--------|------|
-| Simple CRUD operations | Routine work, no deep analysis needed |
-| Small bug fix (first attempt) | Try in Claude Code first |
-| Documentation updates only | Accuracy over creativity |
-| Formatting/lint fixes | Mechanical processing |
+| 単純な CRUD 操作 | 定型作業，深い分析不要 |
+| 小規模なバグ修正（初回） | まず Claude Code で試行 |
+| ドキュメント更新のみ | 創造性より正確性重視 |
+| フォーマット・リント修正 | 機械的な処理 |

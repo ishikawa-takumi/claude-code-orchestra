@@ -78,7 +78,7 @@ Add update notice at top of file:
 
 ## Report
 
-After updating, report to user (in English):
+After updating, report to user (in Japanese):
 
 - Which libraries were updated
 - Significant changes found

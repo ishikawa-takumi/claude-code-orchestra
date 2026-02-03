@@ -4,20 +4,20 @@
 
 ## Context Management (CRITICAL)
 
-**Be mindful of context consumption when using Gemini.** Gemini output tends to be large, so use a subagent.
+**コンテキスト消費を意識してGeminiを使う。** Gemini出力は大きくなりがちなので、サブエージェント経由を推奨。
 
-| Situation | Recommended Approach |
+| 状況 | 推奨方法 |
 |------|----------|
-| Short questions/short answers | direct call OK |
-| Codebase analysis | via subagent (large output) |
-| Library research | via subagent (large output) |
-| Multimodal processing | via subagent |
+| 短い質問・短い回答 | 直接呼び出しOK |
+| コードベース分析 | サブエージェント経由（出力大） |
+| ライブラリ調査 | サブエージェント経由（出力大） |
+| マルチモーダル処理 | サブエージェント経由 |
 
 ```
 ┌──────────────────────────────────────────────────────────┐
 │  Main Claude Code                                        │
-│  → Direct call OK for short questions                    │
-│  → Use subagents for large output                        │
+│  → 短い質問なら直接呼び出しOK                             │
+│  → 大きな出力が予想されるならサブエージェント経由          │
 │                                                          │
 │  ┌────────────────────────────────────────────────────┐ │
 │  │  Subagent (general-purpose)                         │ │
@@ -65,13 +65,13 @@ ALWAYS consult Gemini BEFORE:
 
 Consult Gemini when user says:
 
-| Trigger examples |
-|---------|
-| "Research" "Investigate" "Look up" |
-| "Analyze this PDF/video/audio" |
-| "Understand the entire codebase" |
-| "Check the latest documentation" |
-| "Gather information about X" |
+| Japanese | English |
+|----------|---------|
+| 「調べて」「リサーチして」「調査して」 | "Research" "Investigate" "Look up" |
+| 「このPDF/動画/音声を見て」 | "Analyze this PDF/video/audio" |
+| 「コードベース全体を理解して」 | "Understand the entire codebase" |
+| 「最新のドキュメントを確認して」 | "Check the latest documentation" |
+| 「〜について情報を集めて」 | "Gather information about X" |
 
 ## When NOT to Consult
 
@@ -148,14 +148,14 @@ prompt: |
 
 ### Step 2: Continue Your Work
 
-While the subagent is processing, you can:
+While subagent is processing, you can:
 - Work on other files
 - Run tests
 - Spawn another subagent for Codex consultation
 
 ### Step 3: Receive Summary
 
-Subagent returns a concise summary. Full output is available in `.claude/docs/research/` if needed.
+Subagent returns concise summary. Full output available in `.claude/docs/research/` if needed.
 
 ## Gemini CLI Commands Reference
 
@@ -179,7 +179,7 @@ gemini -p "{question}" --output-format json 2>/dev/null
 1. Ask Gemini in **English**
 2. Subagent receives response in **English**
 3. Subagent summarizes and saves full output
-4. Main receives summary, reports to user in **English**
+4. Main receives summary, reports to user in **Japanese**
 
 ## Why Subagent Pattern?
 
