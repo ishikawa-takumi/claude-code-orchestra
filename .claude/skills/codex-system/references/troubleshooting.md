@@ -1,78 +1,78 @@
-# トラブルシューティング
+# Troubleshooting
 
-## Codex CLI が見つからない
+## Codex CLI Not Found
 
 ```bash
-# 確認
+# Check
 which codex
 codex --version
 
-# インストール
+# Install
 npm install -g @openai/codex
 ```
 
-## 認証エラー
+## Authentication Error
 
 ```bash
-# 再認証
+# Re-authenticate
 codex login
 
-# ステータス確認
+# Check status
 codex login status
 ```
 
-## タイムアウト
+## Timeout
 
-| reasoning_effort | 推奨タイムアウト |
-|-----------------|-----------------|
-| low             | 60s             |
-| medium          | 180s            |
-| high            | 600s            |
-| xhigh           | 900s            |
+| reasoning_effort | Recommended Timeout |
+|-----------------|---------------------|
+| low             | 60s                 |
+| medium          | 180s                |
+| high            | 600s                |
+| xhigh           | 900s                |
 
-config.toml で設定:
+Configure in `config.toml`:
 ```toml
 [mcp_servers.codex]
 tool_timeout_sec = 600
 ```
 
-## Git リポジトリエラー
+## Git Repository Error
 
 ```bash
-# Git 管理外で実行する場合
+# When running outside a Git repo
 codex exec --skip-git-repo-check ...
 ```
 
-## reasoning 出力が多すぎる
+## Too Much reasoning Output
 
 ```bash
-# stderr 抑制
+# Suppress stderr
 codex exec ... 2>/dev/null
 
-# または config.toml で
+# Or set in config.toml
 hide_agent_reasoning = true
 ```
 
-## セッション継続できない
+## Cannot Continue Session
 
 ```bash
-# 最近のセッション一覧
+# Recent sessions list
 codex sessions list
 
-# 特定セッションの詳細
+# Details for a specific session
 codex sessions show {SESSION_ID}
 ```
 
-## sandbox 権限エラー
+## Sandbox Permission Error
 
-| エラー | 原因 | 解決策 |
+| Error | Cause | Solution |
 |--------|------|--------|
-| Permission denied | read-only で書き込み | workspace-write に変更 |
-| Network blocked | sandbox 制限 | danger-full-access（慎重に） |
+| Permission denied | writing in read-only | switch to workspace-write |
+| Network blocked | sandbox restriction | danger-full-access (use with caution) |
 
-## メモリ不足
+## Out of Memory
 
-大きなコードベースを分析する場合:
-1. 対象ファイルを絞る
-2. 段階的に分析
-3. `--config context_limit=...` で調整
+When analyzing a large codebase:
+1. Narrow the target files
+2. Analyze in stages
+3. Tune with `--config context_limit=...`

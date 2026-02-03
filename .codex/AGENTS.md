@@ -87,7 +87,7 @@ Structure your response for Claude Code to use:
 
 ## CLI Logs
 
-Codex/Gemini への入出力は `.claude/logs/cli-tools.jsonl` に記録されています。
-過去の相談内容を確認する場合は、このログを参照してください。
+Codex/Gemini inputs and outputs are recorded in `.claude/logs/cli-tools.jsonl`.
+If you need to review past consultations, refer to this log.
 
-`/checkpointing` 実行後、下記に Session History が追記されます。
+After running `/checkpointing`, Session History is appended below.

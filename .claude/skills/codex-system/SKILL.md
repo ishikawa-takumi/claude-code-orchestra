@@ -15,28 +15,28 @@ metadata:
 
 **Codex CLI (gpt-5.2-codex) is your highly capable supporter for deep reasoning tasks.**
 
-> **詳細ルール**: `.claude/rules/codex-delegation.md`
+> **Detailed rules**: `.claude/rules/codex-delegation.md`
 
 ## Context Management (CRITICAL)
 
-**サブエージェント経由を推奨。** メインオーケストレーターのコンテキストを節約するため。
+**Use subagents whenever possible.** This preserves the main orchestrator's context.
 
-| 状況 | 方法 |
+| Situation | Method |
 |------|------|
-| 詳細な設計相談 | サブエージェント経由（推奨） |
-| デバッグ分析 | サブエージェント経由（推奨） |
-| 短い質問 (1-2文回答) | 直接呼び出しOK |
+| Detailed design consultation | via subagent (recommended) |
+| Debugging analysis | via subagent (recommended) |
+| Short questions (1-2 sentence answers) | direct call OK |
 
 ## When to Consult (MUST)
 
 | Situation | Trigger Examples |
 |-----------|------------------|
-| **Design decisions** | 「どう設計？」「アーキテクチャ」 / "How to design?" |
-| **Debugging** | 「なぜ動かない？」「エラー」 / "Debug" "Error" |
-| **Trade-off analysis** | 「どちらがいい？」「比較して」 / "Compare" "Which?" |
-| **Complex implementation** | 「実装方法」「どう作る？」 / "How to implement?" |
-| **Refactoring** | 「リファクタ」「シンプルに」 / "Refactor" "Simplify" |
-| **Code review** | 「レビューして」「確認して」 / "Review" "Check" |
+| **Design decisions** | "How to design?" |
+| **Debugging** | "Debug" "Error" |
+| **Trade-off analysis** | "Compare" "Which?" |
+| **Complex implementation** | "How to implement?" |
+| **Refactoring** | "Refactor" "Simplify" |
+| **Code review** | "Review" "Check" |
 
 ## When NOT to Consult
 
@@ -82,7 +82,7 @@ codex exec --model gpt-5.2-codex --sandbox read-only --full-auto "Brief question
 ### Sandbox Modes
 
 | Mode | Use Case |
-|------|----------|
+|------|------|
 | `read-only` | Analysis, review, debugging advice |
 | `workspace-write` | Implementation, refactoring, fixes |
 
@@ -91,7 +91,7 @@ codex exec --model gpt-5.2-codex --sandbox read-only --full-auto "Brief question
 1. Ask Codex in **English**
 2. Receive response in **English**
 3. Execute based on advice (or let Codex execute)
-4. Report to user in **Japanese**
+4. Report to user in **English**
 
 ## Task Templates
 

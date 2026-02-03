@@ -223,7 +223,7 @@ def generate_session_history(by_date: dict) -> str:
         data = by_date[date]
 
         if data.get("codex"):
-            lines.append("**Codex相談:**")
+            lines.append("**Codex consultations:**")
             for item in data["codex"][:5]:  # Limit to 5 per day
                 prompt_summary = item["prompt"][:100].replace("\n", " ")
                 status = "✓" if item["success"] else "✗"
@@ -231,7 +231,7 @@ def generate_session_history(by_date: dict) -> str:
             lines.append("")
 
         if data.get("gemini"):
-            lines.append("**Gemini調査:**")
+            lines.append("**Gemini research:**")
             for item in data["gemini"][:5]:  # Limit to 5 per day
                 prompt_summary = item["prompt"][:100].replace("\n", " ")
                 status = "✓" if item["success"] else "✗"

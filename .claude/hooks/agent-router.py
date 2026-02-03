@@ -11,15 +11,6 @@ import sys
 
 # Triggers for Codex (design, debugging, deep reasoning)
 CODEX_TRIGGERS = {
-    "ja": [
-        "設計", "どう設計", "アーキテクチャ",
-        "なぜ動かない", "エラー", "バグ", "デバッグ",
-        "どちらがいい", "比較して", "トレードオフ",
-        "実装方法", "どう実装",
-        "リファクタリング", "リファクタ",
-        "レビュー", "見て",
-        "考えて", "分析して", "深く",
-    ],
     "en": [
         "design", "architecture", "architect",
         "debug", "error", "bug", "not working", "fails",
@@ -33,13 +24,6 @@ CODEX_TRIGGERS = {
 
 # Triggers for Gemini (research, multimodal, large context)
 GEMINI_TRIGGERS = {
-    "ja": [
-        "調べて", "リサーチ", "調査",
-        "PDF", "動画", "音声", "画像",
-        "コードベース全体", "リポジトリ全体",
-        "最新", "ドキュメント",
-        "ライブラリ", "パッケージ",
-    ],
     "en": [
         "research", "investigate", "look up", "find out",
         "pdf", "video", "audio", "image",
